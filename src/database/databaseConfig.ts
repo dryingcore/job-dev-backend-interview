@@ -5,10 +5,9 @@ export default class Database {
   private client: Client;
 
   constructor() {
-    // Cria uma instância de ExposeEnvironmentVariables
     const env = new ExposeEnvironmentVariables();
 
-    // Acessa as variáveis de ambiente corretamente usando o método get
+    // Configuração do cliente PostgreSQL
     this.client = new Client({
       host: env.get('DB_HOST') as string,
       port: env.get('DB_PORT', true) as number,
@@ -35,11 +34,12 @@ export default class Database {
   /**
    * Executa uma consulta SQL no banco de dados.
    * @param query Consulta SQL a ser executada.
+   * @param params Parâmetros opcionais para a consulta.
    * @returns Resultado da consulta.
    */
-  public async query(query: string): Promise<any> {
+  public async query(query: string, params: any[] = []): Promise<any> {
     try {
-      const result = await this.client.query(query);
+      const result = await this.client.query(query, params);
       return { rows: result.rows };
     } catch (error) {
       console.error('Erro ao executar consulta SQL:', error);
@@ -61,7 +61,7 @@ export default class Database {
   }
 
   /**
-   * Obtém o cliente do banco de dados para executar consultas.
+   * Obtém o cliente do banco de dados para executar consultas diretamente.
    * @returns Instância do cliente do banco de dados.
    */
   public getClient(): Client {
