@@ -2,8 +2,11 @@
 module.exports = {
   preset: 'ts-jest',
   testEnvironment: 'node',
-  moduleDirectories: ['node_modules', 'src'], // Se usar paths no tsconfig
+  moduleDirectories: ['node_modules', 'src'], // para resolver caminhos relativos
   transform: {
-    '^.+\\.tsx?$': 'ts-jest', // Transforma arquivos TypeScript para testes
+    '^.+\\.tsx?$': 'ts-jest', // transforma arquivos TypeScript
+  },
+  moduleNameMapper: {
+    '^@/(.*)$': '<rootDir>/src/$1', // resolve os caminhos com "@"
   },
 };

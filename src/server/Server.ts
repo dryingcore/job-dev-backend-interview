@@ -1,4 +1,4 @@
-import requestLogger from '@/utils/requestLogger';
+import requestLogger from '../utils/requestLogger';
 import http, { IncomingMessage, ServerResponse } from 'http';
 
 export default class Server {
@@ -27,6 +27,11 @@ export default class Server {
       res.setHeader('Content-Type', 'text/plain');
       res.end('Not Found');
     }
+  }
+
+  // metodo para testar o servidor (SIM EU SEI QUE ISSO E UM CRIME!!! ;-;)
+  public testHandleRequest(req: IncomingMessage, res: ServerResponse): void {
+    this.handleRequest(req, res);
   }
 
   // metodo para adicionar rotas
