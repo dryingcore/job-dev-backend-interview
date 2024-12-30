@@ -6,8 +6,10 @@
     "doc": "docs"
   },
   "scripts": {
-    "start:linux": "rm -rf dist && tsc && node dist/app.js",
-    "test": "jest"
+    "clean": "rm -rf dist",
+    "build": "tsc",
+    "test": "npm run clean && npm run build && jest",
+    "start": "node dist/app.js"
   },
   "keywords": [
     "goomer",
